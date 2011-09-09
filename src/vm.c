@@ -117,6 +117,8 @@ int vm_run (struct _vm * vm) {
             case OP_MOVLB :
             case OP_MOVSB :
             case OP_CMPR  :
+            case OP_INC   :
+            case OP_DEC   :
                 rd = vm->memory[vm->IP++];
                 rs = vm->memory[vm->IP++];
             switch (op) {
@@ -161,6 +163,12 @@ int vm_run (struct _vm * vm) {
                     break;
                 case OP_CMPR :
                     vm->FLAGS = vm->reg[rd] - vm->reg[rs];
+                    break;
+                case OP_INC :
+                    vm->reg[rd] += 1;
+                    break;
+                case OP_DEC :
+                    vm->reg[rd] -= 1;
                     break;
             }
             break;
